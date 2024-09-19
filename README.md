@@ -11,7 +11,7 @@
 
    <!-- Typing svg -->
    <p align="center">
-      <a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=38&pause=700&duration=3000&center=true&vCenter=true&width=620&height=60&lines=Ammaar+Alam;Software+Developer;Princeton+University+'27+BSE+–COS;" alt="Typing SVG" /></a>
+      <a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=38&pause=700&duration=3000&center=true&vCenter=true&width=620&height=60&lines=Software+Developer;Princeton+University+'27;BSE+– Computer Science;" alt="Typing SVG" /></a>
    </p>
 
    <!-- Badges  -->
