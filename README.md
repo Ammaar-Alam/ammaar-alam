@@ -73,10 +73,10 @@
    <!-- GitHub Stats -->
    ## <img src="https://your-github-stats-gif-link.com" width="35"><b> Github Stats </b>
    [![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=Ammaar-Alam&theme=dark&background=000000)](https://github.com/anuraghazra/github-readme-stats)
+   
    [![GitHub Streak](http://github-readme-streak-stats.herokuapp.com?user=Ammaar-Alam&theme=dark&background=000000)](https://git.io/streak-stats)
-   https://github-readme-stats.vercel.app/api?username=ammaar-alam
 
-   <img src="https://your-divider-image-link.com" alt="Divider Image">
+   ![](https://komarev.com/ghpvc/?username=ammaar-alam)
 
    <!--end message -->
 
@@ -87,9 +87,5 @@
    <p>
    Thank you for visiting my GitHub profile! Feel free to explore my repositories and projects. If you have any questions, suggestions, or collaboration opportunities, please don't hesitate to reach out. Let's collaborate and build amazing things together! 
    </p>
-   
-   [![](https://visitcount.itsvg.in/api?id=Ammaar-Alam&label=Profile%20Views&color=6&icon=0&pretty=true)](https://visitcount.itsvg.in)
-
-
    </div>
 </div>
