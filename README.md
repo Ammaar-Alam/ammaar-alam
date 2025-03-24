@@ -29,11 +29,6 @@
 
    <br>
 
-   <!-- Snake svg  -->
-   <div align="center">
-      <img  src="https://your-custom-snake-image-link.com" alt="snake" />
-   </div>
-
    <!-- General Information -->
    ## <picture><img src="https://your-about-me-gif-link.com" width = 50px></picture> **About me**
    - 👨‍💻 I am a **computer science student** at **Princeton University** with interests in **embedded systems, machine learning, and web development.**
