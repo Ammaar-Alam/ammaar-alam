@@ -5,7 +5,7 @@
   # Ammaar Alam 
   
   <p align="center">
-     <a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=22&pause=1000&color=6E85B7&center=true&vCenter=true&width=440&height=45&lines=Computer+Science+@+Princeton;Full-Stack+Developer;Machine+Learning+Enthusiast;IoT+&+Arduino+Developer" alt="Typing SVG" /></a>
+     <a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=22&pause=1000&color=6E85B7&center=true&vCenter=true&width=440&height=45&lines=Computer+Science+@+Princeton+'27;Photographer;Developer;Machine+Learning+Enthusiast;IoT" alt="Typing SVG" /></a>
   </p>
   
   <!-- Social Badges -->
@@ -88,48 +88,57 @@
   <table>
     <tr>
       <td width="50%">
-        <h3 align="center">AI Campus Assistant</h3>
+        <h3 align="center">TigerMatch</h3>
         <div align="center">
-          <a href="https://github.com/Ammaar-Alam/ai-campus-assistant" target="_blank">
-            <img src="https://github.com/Anmol-Baranwal/Cool-GIFs-For-GitHub/assets/74038190/29fd6286-4e7b-4d6c-818f-c4765d5e39a9" width="100" alt="AI Assistant" />
+          <a href="https://github.com/Ammaar-Alam/tigerlink" target="_blank">
+            <img src="https://github.com/Anmol-Baranwal/Cool-GIFs-For-GitHub/assets/74038190/67f477ed-6624-42da-99f0-1a7b1a16eecb" width="100" alt="TigerMatch" />
           </a>
           <p>
-            <a href="https://github.com/Ammaar-Alam/ai-campus-assistant" target="_blank">
+            <a href="https://github.com/Ammaar-Alam/tigerlink" target="_blank">
               <img src="https://img.shields.io/badge/Code-black?style=for-the-badge&logo=github">
+            </a>
+            <a href="https://match.tigerapps.org" target="_blank">
+              <img src="https://img.shields.io/badge/Live-blue?style=for-the-badge&logo=vercel">
             </a>
           </p>
           <p>
-            <strong>AI-powered campus assistant for Princeton University managing 450+ daily active users with location-based services via Google Places API</strong>
+            <strong>Full-stack platform connecting Princeton students with questionnaire-based matching, user profiles, E2E encrypted messaging, and CAS authentication</strong>
           </p>
         </div>
       </td>
       <td width="50%">
-        <h3 align="center">Instagram Follower Analyzer</h3>
+        <h3 align="center">Princeton AI Campus Assistant</h3>
         <div align="center">
-          <a href="https://github.com/Ammaar-Alam/instagram-follower-analyzer" target="_blank">
-            <img src="https://user-images.githubusercontent.com/74038190/235294010-ec412ef5-e3da-4efa-b1d4-0ab4d4638755.gif" width="100" alt="Instagram" />
+          <a href="https://github.com/leo-step/Today" target="_blank">
+            <img src="https://github.com/Anmol-Baranwal/Cool-GIFs-For-GitHub/assets/74038190/29fd6286-4e7b-4d6c-818f-c4765d5e39a9" width="100" alt="AI Assistant" />
           </a>
           <p>
-            <a href="https://github.com/Ammaar-Alam/instagram-follower-analyzer" target="_blank">
+            <a href="https://github.com/leo-step/Today" target="_blank">
               <img src="https://img.shields.io/badge/Code-black?style=for-the-badge&logo=github">
+            </a>
+            <a href="https://tay.tigerapps.org" target="_blank">
+              <img src="https://img.shields.io/badge/Live-blue?style=for-the-badge&logo=vercel">
             </a>
           </p>
           <p>
-            <strong>Full-stack web application with custom C-based JSON parser for efficient Instagram follower data analysis and O(1) lookups</strong>
+            <strong>AI-powered campus assistant serving 450+ daily users with real-time geospatial integration and optimized email processing</strong>
           </p>
         </div>
       </td>
     </tr>
     <tr>
       <td width="50%">
-        <h3 align="center">Automatic Dorm Door Opener</h3>
+        <h3 align="center">IoT Smart Door System</h3>
         <div align="center">
           <a href="https://github.com/Ammaar-Alam/doorUnlocker" target="_blank">
-            <img src="https://user-images.githubusercontent.com/74038190/212257465-7ce8d493-cac5-494e-982a-5a9deb852c4b.gif" width="100" alt="Automatic Door" />
+            <img src="https://user-images.githubusercontent.com/74038190/212257465-7ce8d493-cac5-494e-982a-5a9deb852c4b.gif" width="100" alt="IoT Door" />
           </a>
           <p>
             <a href="https://github.com/Ammaar-Alam/doorUnlocker" target="_blank">
               <img src="https://img.shields.io/badge/Code-black?style=for-the-badge&logo=github">
+            </a>
+            <a href="https://door.ammaar.xyz" target="_blank">
+              <img src="https://img.shields.io/badge/Live-blue?style=for-the-badge&logo=vercel">
             </a>
           </p>
           <p>
@@ -138,18 +147,58 @@
         </div>
       </td>
       <td width="50%">
-        <h3 align="center">Real-Time Chat Application</h3>
+        <h3 align="center">WebChat</h3>
         <div align="center">
           <a href="https://github.com/Ammaar-Alam/java-ChatApp" target="_blank">
-            <img src="https://user-images.githubusercontent.com/74038190/219923823-bf1ce878-c6b8-4faa-be07-93e6b1006521.gif" width="100" alt="Chat" />
+            <img src="https://user-images.githubusercontent.com/74038190/219923823-bf1ce878-c6b8-4faa-be07-93e6b1006521.gif" width="100" alt="WebChat" />
           </a>
           <p>
             <a href="https://github.com/Ammaar-Alam/java-ChatApp" target="_blank">
               <img src="https://img.shields.io/badge/Code-black?style=for-the-badge&logo=github">
             </a>
+            <a href="https://webchat.ammaar.xyz" target="_blank">
+              <img src="https://img.shields.io/badge/Live-blue?style=for-the-badge&logo=vercel">
+            </a>
           </p>
           <p>
-            <strong>WebSocket-powered real-time chat application with secure, password-protected chat rooms and encrypted messaging</strong>
+            <strong>Real-time chat application with secure rooms, instant messaging via WebSockets, and persistent message history</strong>
+          </p>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td width="50%">
+        <h3 align="center">GamePigeon AI Solver</h3>
+        <div align="center">
+          <a href="https://github.com/Ammaar-Alam/gamepigeon-scripts" target="_blank">
+            <img src="https://github.com/Anmol-Baranwal/Cool-GIFs-For-GitHub/assets/74038190/3c16d4f2-b757-4c70-8f42-43d5dddd2c36" width="100" alt="AI Solver" />
+          </a>
+          <p>
+            <a href="https://github.com/Ammaar-Alam/gamepigeon-scripts" target="_blank">
+              <img src="https://img.shields.io/badge/Code-black?style=for-the-badge&logo=github">
+            </a>
+          </p>
+          <p>
+            <strong>AI-powered scripts for GamePigeon games with record-breaking WordHunt solver using OCR/PPO algorithms and precision game analysis</strong>
+          </p>
+        </div>
+      </td>
+      <td width="50%">
+        <h3 align="center">Instagram Follower Analyzer</h3>
+        <div align="center">
+          <a href="https://github.com/Ammaar-Alam/instagram-Checker" target="_blank">
+            <img src="https://user-images.githubusercontent.com/74038190/235294010-ec412ef5-e3da-4efa-b1d4-0ab4d4638755.gif" width="100" alt="Instagram" />
+          </a>
+          <p>
+            <a href="https://github.com/Ammaar-Alam/instagram-Checker" target="_blank">
+              <img src="https://img.shields.io/badge/Code-black?style=for-the-badge&logo=github">
+            </a>
+            <a href="https://instagram-checker-b38e2b3eb69a.herokuapp.com/" target="_blank">
+              <img src="https://img.shields.io/badge/Live-blue?style=for-the-badge&logo=heroku">
+            </a>
+          </p>
+          <p>
+            <strong>Web application to analyze Instagram connections using a C-based analyzer with hash table implementation for efficient data processing</strong>
           </p>
         </div>
       </td>
@@ -160,18 +209,14 @@
 <!-- Divider -->
 <img src="https://user-images.githubusercontent.com/74038190/212284115-f47cd8ff-2ffb-4b04-b5bf-4d1c14c0247f.gif" width="100%">
 
-## <img src="https://user-images.githubusercontent.com/74038190/216655834-f5fe3f6c-6581-4c2d-8203-04d31a574c02.gif" width="30" /> What I'm Up To
+## <img src="https://user-images.githubusercontent.com/74038190/216656886-c421cc9b-45b3-4248-b432-9191172798d2.gif" width="30" /> Next Up
 
-- 🚀 **Upcoming Software Engineering Intern** at **UKG**
-
-- 👨‍💻 **Junior Software Developer** at **TigerApps**
-
-- 💡 **Previously**: Machine Learning Intern at Dell Technologies for 3 years
+- Incoming Software Engineering Intern at <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/UKG_%28Ultimate_Kronos_Group%29_logo.svg/1200px-UKG_%28Ultimate_Kronos_Group%29_logo.svg.png" width="80" height="25" style="vertical-align: middle;">
 
 <!-- Divider -->
 <img src="https://user-images.githubusercontent.com/74038190/212284115-f47cd8ff-2ffb-4b04-b5bf-4d1c14c0247f.gif" width="100%">
 
-## <img src="https://user-images.githubusercontent.com/74038190/215283417-55c9fe42-d47b-4b51-94d1-cfc135280cbd.gif" width="30" /> GitHub Stats
+## <img src="https://user-images.githubusercontent.com/74038190/216654159-f76e3e8c-f2f9-4b7e-9383-3be4c0e8fe95.gif" width="30" /> GitHub Stats
 
 <div align="center">
   <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=Ammaar-Alam&theme=tokyonight&hide_border=true&include_all_commits=false&count_private=true&layout=compact" alt="Top Languages" />
@@ -188,7 +233,7 @@
 
 <div align="center">
   <a href="mailto:ammaar@princeton.edu">
-    <img src="https://github.com/Anmol-Baranwal/Cool-GIFs-For-GitHub/assets/74038190/19b4ef1d-2035-4e6f-8484-8bd79d604dc9" width="80" />
+    <img src="https://cdn-icons-gif.flaticon.com/8717/8717946.gif" width="80" />
   </a>
   <a href="https://linkedin.com/in/ammaar-alam/">
     <img src="https://user-images.githubusercontent.com/74038190/235294012-0a55e343-37ad-4b0f-924f-c8431d9d2483.gif" width="80" />
