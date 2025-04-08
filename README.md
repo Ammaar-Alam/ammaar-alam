@@ -31,11 +31,8 @@
 ## <img src="https://user-images.githubusercontent.com/74038190/216120981-b9507c36-0e04-4469-8e27-c99271b45ba5.png" alt="Handshake" width="30" /> About Me
 
 - 🎓 Currently pursuing a **B.S.E. in Computer Science** at **Princeton University** (Class of 2027)
-- 👨‍💻 Working as a **Junior Software Developer** at **TigerApps**, building an AI Campus Assistant
 - 🔬 Minoring in **Statistics & Machine Learning** and **Optimization & Quantitative Decision Science**
-- 🔭 Passionate about **embedded systems**, **machine learning**, and **full-stack development**
-- ⚡ Experience in **developing IoT solutions** and **real-time applications**
-- 📚 Previously interned at **Dell Technologies** as a Machine Learning Intern
+- 🔭 Interested in all things AI/ML (also photography :D)
 
 <img align="right" src="https://user-images.githubusercontent.com/74038190/219923809-b86dc415-a0c2-4a38-bc88-ad6cf06395a8.gif" width="400">
 
