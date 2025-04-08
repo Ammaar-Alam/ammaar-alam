@@ -46,7 +46,7 @@
 - 🎓 Currently pursuing a **B.S.E. in Computer Science** at **Princeton University** (Class of 2027)
 - 🔬 Minoring in **Statistics & Machine Learning** and **Optimization & Quantitative Decision Science**
 - 🔭 Interested in all things AI/ML (also photography :D)
-- Incoming Software Engineering Intern at <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/UKG_%28Ultimate_Kronos_Group%29_logo.svg/1200px-UKG_%28Ultimate_Kronos_Group%29_logo.svg.png" width="70" height="20" style="vertical-align: middle;">
+- Incoming Software Engineering Intern at <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/UKG_%28Ultimate_Kronos_Group%29_logo.svg/1200px-UKG_%28Ultimate_Kronos_Group%29_logo.svg.png" width="65" height="20" style="vertical-align: middle;">
 
 <img align="right" src="https://user-images.githubusercontent.com/74038190/219923809-b86dc415-a0c2-4a38-bc88-ad6cf06395a8.gif" width="400">
 
