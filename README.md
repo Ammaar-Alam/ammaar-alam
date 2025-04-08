@@ -5,7 +5,7 @@
   # Ammaar Alam 
   
   <p align="center">
-     <a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=22&pause=1000&color=6E85B7&center=true&vCenter=true&width=440&height=45&lines=Computer+Science+@+Princeton+'27;Photographer;Developer;Machine+Learning+Enthusiast;IoT" alt="Typing SVG" /></a>
+     <a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=22&pause=1000&color=6E85B7&center=true&vCenter=true&width=440&height=45&lines=Computer+Science+@+Princeton+'27;Photographer;Developer" alt="Typing SVG" /></a>
   </p>
   
   <!-- Social Badges -->
@@ -28,11 +28,25 @@
 <!-- Divider -->
 <img src="https://user-images.githubusercontent.com/74038190/212284115-f47cd8ff-2ffb-4b04-b5bf-4d1c14c0247f.gif" width="100%">
 
+## <img src="https://user-images.githubusercontent.com/74038190/216654159-f76e3e8c-f2f9-4b7e-9383-3be4c0e8fe95.gif" width="30" /> GitHub Stats
+
+<div align="center">
+  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=Ammaar-Alam&theme=tokyonight&hide_border=true&include_all_commits=false&count_private=true&layout=compact" alt="Top Languages" />
+</div>
+
+<div align="center">
+  <img src="http://github-readme-streak-stats.herokuapp.com?user=Ammaar-Alam&theme=tokyonight&hide_border=true" alt="GitHub Streak" />
+</div>
+
+<!-- Divider -->
+<img src="https://user-images.githubusercontent.com/74038190/212284115-f47cd8ff-2ffb-4b04-b5bf-4d1c14c0247f.gif" width="100%">
+
 ## <img src="https://user-images.githubusercontent.com/74038190/216120981-b9507c36-0e04-4469-8e27-c99271b45ba5.png" alt="Handshake" width="30" /> About Me
 
 - 🎓 Currently pursuing a **B.S.E. in Computer Science** at **Princeton University** (Class of 2027)
 - 🔬 Minoring in **Statistics & Machine Learning** and **Optimization & Quantitative Decision Science**
 - 🔭 Interested in all things AI/ML (also photography :D)
+- Incoming Software Engineering Intern at <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/UKG_%28Ultimate_Kronos_Group%29_logo.svg/1200px-UKG_%28Ultimate_Kronos_Group%29_logo.svg.png" width="70" height="20" style="vertical-align: middle;">
 
 <img align="right" src="https://user-images.githubusercontent.com/74038190/219923809-b86dc415-a0c2-4a38-bc88-ad6cf06395a8.gif" width="400">
 
@@ -201,47 +215,6 @@
       </td>
     </tr>
   </table>
-</div>
-
-<!-- Divider -->
-<img src="https://user-images.githubusercontent.com/74038190/212284115-f47cd8ff-2ffb-4b04-b5bf-4d1c14c0247f.gif" width="100%">
-
-## <img src="https://user-images.githubusercontent.com/74038190/216656886-c421cc9b-45b3-4248-b432-9191172798d2.gif" width="30" /> Next Up
-
-- Incoming Software Engineering Intern at <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/UKG_%28Ultimate_Kronos_Group%29_logo.svg/1200px-UKG_%28Ultimate_Kronos_Group%29_logo.svg.png" width="80" height="25" style="vertical-align: middle;">
-
-<!-- Divider -->
-<img src="https://user-images.githubusercontent.com/74038190/212284115-f47cd8ff-2ffb-4b04-b5bf-4d1c14c0247f.gif" width="100%">
-
-## <img src="https://user-images.githubusercontent.com/74038190/216654159-f76e3e8c-f2f9-4b7e-9383-3be4c0e8fe95.gif" width="30" /> GitHub Stats
-
-<div align="center">
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=Ammaar-Alam&theme=tokyonight&hide_border=true&include_all_commits=false&count_private=true&layout=compact" alt="Top Languages" />
-</div>
-
-<div align="center">
-  <img src="http://github-readme-streak-stats.herokuapp.com?user=Ammaar-Alam&theme=tokyonight&hide_border=true" alt="GitHub Streak" />
-</div>
-
-<!-- Divider -->
-<img src="https://user-images.githubusercontent.com/74038190/212284115-f47cd8ff-2ffb-4b04-b5bf-4d1c14c0247f.gif" width="100%">
-
-## <img src="https://user-images.githubusercontent.com/74038190/216656971-9a208a88-e6ad-4b7a-88eb-c410e4cf0e00.gif" width="30" /> Connect With Me
-
-<div align="center">
-  <a href="mailto:ammaar@princeton.edu">
-    <img src="https://cdn-icons-gif.flaticon.com/8717/8717946.gif" width="80" />
-  </a>
-  <a href="https://linkedin.com/in/ammaar-alam/">
-    <img src="https://user-images.githubusercontent.com/74038190/235294012-0a55e343-37ad-4b0f-924f-c8431d9d2483.gif" width="80" />
-  </a>
-  <a href="https://ammaaralam.com">
-    <img src="https://user-images.githubusercontent.com/74038190/235294013-a33e5c43-a01c-43f6-b44d-a406d8b4ab75.gif" width="80" />
-  </a>
-</div>
-
-<div align="center">
-  <img src="https://komarev.com/ghpvc/?username=ammaar-alam&style=for-the-badge&color=blueviolet" alt="Profile Views" />
 </div>
 
 <!-- Footer -->
