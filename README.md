@@ -1,9 +1,7 @@
 <!-- Header with animated greeting -->
 <div align="center">
   <img src="https://github.com/Anmol-Baranwal/Cool-GIFs-For-GitHub/assets/74038190/9be4d344-6782-461a-b5a6-32a07bf7b34e" width="700" height= "300" alt="animated hello">
-  
-  # Ammaar Alam 
-  
+    
   <p align="center">
      <a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=22&pause=1000&color=6E85B7&center=true&vCenter=true&width=440&height=45&lines=Computer+Science+@+Princeton+'27;Photographer;Developer" alt="Typing SVG" /></a>
   </p>
