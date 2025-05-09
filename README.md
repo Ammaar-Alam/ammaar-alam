@@ -36,13 +36,11 @@
 ## <img src="https://user-images.githubusercontent.com/74038190/212257468-1e9a91f1-b626-4baa-b15d-5c385dfa7ed2.gif" width="30" /> GitHub Stats
 
 <div align="center">
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=Ammaar-Alam&theme=tokyonight&hide_border=true&include_all_commits=false&count_private=true&layout=compact" alt="Top Languages" />
-</div>
+  
+  [![GitHub Streak](https://github-readme-streak-stats-psi-nine.vercel.app?user=Ammaar-Alam&theme=tokyonight&hide_border=true&card_width=490&background=45%2C000000%2C00999F&fire=C00000&sideLabels=00D0FF&currStreakNum=00EBE7&currStreakLabel=00EBE7&ring=00C2BF&dates=6EE9FF83&sideNums=00D0FF)](https://git.io/streak-stats) ![Top Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=Ammaar-Alam&theme=tokyonight&hide_border=true&include_all_commits=false&count_private=true&layout=compact)
 
-<div align="center">
-  <img src="https://github-readme-streak-stats.herokuapp.com/?user=Ammaar-Alam&theme=tokyonight&hide_border=true" alt="GitHub Streak" />
 </div>
-
+  
 <!-- Divider -->
 <img src="https://user-images.githubusercontent.com/74038190/212284115-f47cd8ff-2ffb-4b04-b5bf-4d1c14c0247f.gif" width="100%">
 
