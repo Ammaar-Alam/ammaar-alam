@@ -23,14 +23,11 @@ jobs:
           base: header, activity, community, repositories, metadata
           config_timezone: America/New_York
 
-          config_order: base.header, base.activity, base.community, base.repositories, base.metadata, isocalendar, languages, followup, lines, reactions, achievements
-
-          # === Isometric commit calendar (3-D) + streaks/per-day ===
-          plugin_isocalendar: yes
-          plugin_isocalendar_duration: half-year
+          config_order: base.header, base.activity, base.community, base.repositories, base.metadata, languages, lines  
 
           # === Languages ===
           plugin_languages: yes
+          plugin_languages_ignored: xml, csv
           plugin_languages_sections: most-used
           plugin_languages_limit: 8
           plugin_languages_details: bytes-size, percentage
@@ -42,9 +39,37 @@ jobs:
           plugin_languages_analysis_timeout: 15
 
           # === Extras ===
-          plugin_achievements: yes
-          plugin_achievements_threshold: C
-          plugin_achievements_secrets: yes
-          plugin_lines: yes
-          plugin_followup: yes
-          plugin_reactions: yes
+          plugin_lines: no
+
+          # === Skipping Outliers ===
+          # 1) Global skip (many plugins inherit this)
+          repositories_skipped: |
+            @use.patterns
+            ammaar-alam/tigerlink
+            ammaar-alam/cos-126
+            ammaar-alam/cos-226
+            ammaar-alam/doorUnlocker
+            ammaar-alam/cos333-a*
+            ammaar-alam/My_COS217_A*
+            ammaar-alam/draw-calculator
+          # 2) Languages plugin explicit skip (inherits global, but add for clarity)
+          plugin_languages_skipped: |
+            @use.patterns
+            ammaar-alam/tigerlink
+            ammaar-alam/cos-126
+            ammaar-alam/cos-226
+            ammaar-alam/doorUnlocker
+            ammaar-alam/cos333-a*
+            ammaar-alam/My_COS217_A*
+            ammaar-alam/draw-calculator
+          # 3) Lines plugin explicit skip
+          plugin_lines_skipped: |
+            @use.patterns
+            ammaar-alam/tigerlink
+            ammaar-alam/cos-126
+            ammaar-alam/cos-226
+            ammaar-alam/doorUnlocker
+            ammaar-alam/cos333-a*
+            ammaar-alam/My_COS217_A*
+            ammaar-alam/draw-calculator
+            ammaar-alam/My_COS217_A*
