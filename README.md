@@ -1,4 +1,4 @@
 ![Metrics](./github-metrics.svg)
 
-
-meow
+### About
+College student with interests in anything that makes money and AI/ML
