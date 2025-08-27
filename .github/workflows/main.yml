@@ -40,6 +40,13 @@ jobs:
 
           # === Extras ===
           plugin_lines: no
+          plugin_steam: yes
+          plugin_steam_achievements_limit: 0
+          plugin_steam_games_limit: 3
+          plugin_steam_playtime_threshold: 2
+          plugin_steam_recent_games_limit: 1
+          plugin_steam_sections: player, most-played, recently-played
+          plugin_steam_user: ENT_Viper
 
           # === Skipping Outliers ===
           # 1) Global skip (many plugins inherit this)
