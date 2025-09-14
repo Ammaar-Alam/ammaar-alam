@@ -7,6 +7,6 @@
 
 - 👨‍💻 All of my projects are available at [https://ammaaralam.com](https://ammaaralam.com)
 
-<p>&nbsp;<img align="left" src="https://github-readme-stats.vercel.app/api?username=ammaar-alam&show_icons=true&locale=en" alt="ammaar-alam" /></p>
-<p><img align="right" src="https://github-readme-streak-stats.herokuapp.com/?user=ammaar-alam&" alt="ammaar-alam" /></p>
+<p>&nbsp;<img align="left" width="350" src="https://github-readme-stats.vercel.app/api?username=ammaar-alam&show_icons=true&locale=en" alt="ammaar-alam" /></p>
+<p><img align="right" width="350" src="https://github-readme-streak-stats.herokuapp.com/?user=ammaar-alam&" alt="ammaar-alam" /></p>
 <p align="left"> <img src="https://komarev.com/ghpvc/?username=ammaar-alam&label=Profile%20views&color=0e75b6&style=flat" alt="ammaar-alam" /> </p>
