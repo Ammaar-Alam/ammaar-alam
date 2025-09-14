@@ -1,7 +1,7 @@
 <img src="./github-metrics.svg" align="left" width="420" alt="Metrics" />
 
 <h1 align="center">Hi 👋, I'm Ammaar Alam</h1>
-<h4 align="center">Third-year CS student @ Princeton; minors in Statistics and Machine Learning, and Optimization and Quantitative Decision Science</h3>
+<h6 align="center">Third-year CS student @ Princeton; minors in Statistics and Machine Learning, and Optimization and Quantitative Decision Science</h3>
 
 - 🔭 I’m currently working on research on matching algorithms and building a synthetic reciprocal-OPE benchmark, and running a [campus pilot](https://match.tigerapps.org) to compare offline predictions against observed policy lift
 
