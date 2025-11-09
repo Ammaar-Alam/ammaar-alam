@@ -3,7 +3,7 @@
 <h1 align="center">Hi 👋, I'm Ammaar Alam</h1>
 <h6 align="center">Third-year CS student @ Princeton</h3>
 
-- 🔭 I’m currently working on research on matching algorithms and building a synthetic reciprocal-OPE benchmark, and running a [campus pilot](https://match.tigerapps.org) to compare offline predictions against observed policy lift
+- 🔭 I’m currently working on research on matching algorithms and building a synthetic reciprocal-OPE benchmark, and running a [campus pilot](https://cos398-match-survey.vercel.app/) to compare offline predictions against observed policy lift
 - I'm also currently working on completely redesigning my portfolio site
 
 - 👨‍💻 All of my projects are available at [https://ammaaralam.com](https://ammaaralam.com)
