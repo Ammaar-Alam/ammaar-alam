@@ -3,10 +3,11 @@
 <h1 align="center">Hi 👋, I'm Ammaar Alam</h1>
 <h6 align="center">Third-year CS student @ Princeton</h3>
 
-- 🔭 I’m currently working on research on matching algorithms and building a synthetic reciprocal-OPE benchmark, and running a [campus pilot](https://cos398-match-survey.vercel.app/) to compare offline predictions against observed policy lift
-- I'm also currently working on completely redesigning my portfolio site
+- 🔭 current research involves stable matching and reciprocal compatability [campus pilot](https://cos398-match-survey.vercel.app/) to design novel/improved algorithms at determining relationship affinity
 
-- 👨‍💻 All of my projects are available at [https://ammaaralam.com](https://ammaaralam.com)
+(read the [preliminary paper](https://ammaaralam.com/assets/documents/ah0952_written_final_report) while i wait for IRB approval 😞)
+
+- 👨‍💻 all my projects and info can be found on [https://ammaaralam.com](https://ammaaralam.com)
 
 <p><img align="center" width="360" src="https://github-readme-stats.vercel.app/api?username=ammaar-alam&show_icons=true&locale=en" alt="ammaar-alam" /></p>
 <p><img align="center" width="361" src="https://github-readme-streak-stats.herokuapp.com/?user=ammaar-alam&" alt="ammaar-alam" /></p>
