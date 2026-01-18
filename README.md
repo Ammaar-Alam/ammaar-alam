@@ -5,7 +5,7 @@
 
 - 🔭 current research involves stable matching and reciprocal compatability [campus pilot](https://cos398-match-survey.vercel.app/) to design novel/improved algorithms at determining relationship affinity
 
-(read the [preliminary paper](https://ammaaralam.com/assets/documents/ah0952_written_final_report) while i wait for IRB approval 😞)
+(read the [preliminary paper](https://ammaaralam.com/assets/documents/ah0952_written_final_report.pdf) while i wait for IRB approval 😞)
 
 - 👨‍💻 all my projects and info can be found on [https://ammaaralam.com](https://ammaaralam.com)
 
