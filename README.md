@@ -10,5 +10,4 @@
 - 👨‍💻 all my projects and info can be found on [https://ammaaralam.com](https://ammaaralam.com)
 
 <p><img align="center" width="360" src="https://github-readme-stats.vercel.app/api?username=ammaar-alam&show_icons=true&locale=en" alt="ammaar-alam" /></p>
-<p><img align="center" width="361" src="https://github-readme-streak-stats.herokuapp.com/?user=ammaar-alam&" alt="ammaar-alam" /></p>
 <p align="center"> <img src="https://komarev.com/ghpvc/?username=ammaar-alam&label=Profile%20views&color=0e75b6&style=flat" alt="ammaar-alam" /> </p>
