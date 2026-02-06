@@ -31,13 +31,13 @@ jobs:
           plugin_languages_sections: most-used
           plugin_languages_limit: 10
           plugin_languages_details: lines, percentage, bytes-size
-          plugin_languages_indepth: yes
+          plugin_languages_indepth: no
           plugin_languages_categories: programming, data
           plugin_languages_other: no
           plugin_languages_recent_days: 14
           plugin_languages_recent_load: 10000
-          plugin_languages_analysis_timeout: 30
-          plugin_languages_analysis_timeout_repositories: 60
+          plugin_languages_analysis_timeout: 120
+          plugin_languages_analysis_timeout_repositories: 300
 
           # === Extras ===
           plugin_lines: no
