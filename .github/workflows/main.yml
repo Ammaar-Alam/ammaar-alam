@@ -56,7 +56,6 @@ jobs:
           repositories_skipped: |
             @use.patterns
             ammaar-alam/tigerlink
-            ammaar-alam/cos
             ammaar-alam/cos-126
             ammaar-alam/cos-226
             ammaar-alam/doorUnlocker
