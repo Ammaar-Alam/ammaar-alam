@@ -62,6 +62,9 @@ jobs:
             ammaar-alam/cos333-a*
             ammaar-alam/My_COS217_A*
             ammaar-alam/draw-calculator
+            ammaar-alam/treehouselabs-takehome
+            ammaar-alam/save-the-pet
+            ammaar-alam/imposter
           # 2) Languages plugin explicit skip (inherits global, but add for clarity)
           plugin_languages_skipped: |
             @use.patterns
