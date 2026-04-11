@@ -1,7 +1,7 @@
 <img src="./github-metrics.svg" align="left" width="420" alt="Metrics" />
 
 <h1 align="center">Hi, I'm Ammaar Alam!</h1>
-<h6 align="center">Third-Year CS Student @ Princeton (2027) <br> Interests: Backend Development | Reinforcement Learning | Agentic AI</h6>
+<h6 align="center">Third-Year CS Student @ Princeton (2027) <br> Backend Development | Reinforcement Learning | Agentic AI</h6>
 
 - 🔬 current research: agentic AI & NLP under [Prof. Karthik Narasimhan](https://www.cs.princeton.edu/~karthikn/); focusing on building reinforcement learning environments and evaluation harnesses, and designing multi-model agent pipelines
   - previous research involved stable matching and reciprocal compatability [campus pilot](https://cos398-match-survey.vercel.app/) to design novel/improved algorithms at determining relationship affinity
