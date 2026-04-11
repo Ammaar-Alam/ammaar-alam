@@ -7,7 +7,6 @@
   - previous research involved stable matching in reciprocal compatability with a [campus pilot](https://cos398-match-survey.vercel.app/) to design novel/improved algorithms at determining relationship affinity
 (read the [preliminary paper](https://ammaaralam.com/assets/documents/ah0952_written_final_report.pdf); paused awaiting IRB approval 😞)
 
-
 - 🏗️ lead devops @ [TigerApps](https://tigerApps.princeton.edu) — containerized infra powering the biggest campus apps for thousands of princeton students daily
 
 - 👨‍💻 all my projects and info at [ammaaralam.com](https://ammaaralam.com)
