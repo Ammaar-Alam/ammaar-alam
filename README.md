@@ -8,7 +8,7 @@
 (read the [preliminary paper](https://ammaaralam.com/assets/documents/ah0952_written_final_report.pdf) while i wait for IRB approval 😞)
 
 
-- 🏗️ lead devops @ [TigerApps](https://tigerApps.princeton.edu) — containerized infra powering 10+ campus apps for thousands of daily users
+- 🏗️ lead devops @ [TigerApps](https://tigerApps.princeton.edu) — containerized infra powering the biggest campus apps for thousands of princeton students daily
 
 - 👨‍💻 all my projects and info at [ammaaralam.com](https://ammaaralam.com)
 
