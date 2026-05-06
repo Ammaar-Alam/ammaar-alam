@@ -3,7 +3,7 @@
 <td width="48%" valign="top">
 <img src="./github-metrics.svg" width="100%" alt="Metrics" />
 </td>
-<td width="52%" valign="top">
+<td width="42%" valign="top">
 
 <h1 align="center">Hi, I'm Ammaar Alam!</h1>
 <h6 align="center">Third-Year CS Student @ Princeton (2027) <br> Backend Development | Maching Learning | Agentic AI</h6>
