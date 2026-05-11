@@ -36,8 +36,8 @@ jobs:
           plugin_languages_other: no
           plugin_languages_recent_days: 14
           plugin_languages_recent_load: 10000
-          plugin_languages_analysis_timeout: 120
-          plugin_languages_analysis_timeout_repositories: 300
+          plugin_languages_analysis_timeout: 300
+          plugin_languages_analysis_timeout_repositories: 600
 
           # === Extras ===
           plugin_lines: no
