@@ -9,6 +9,7 @@
 <h6 align="center">Third-Year CS Student @ Princeton (2027) <br> Backend Development | Maching Learning | Agentic AI</h6>
 
 <ul>
+  <li>SWE Intern @ Amazon Leo working on satellites (ML anomaly and fraud detection)</li>
 <li>🔬 current research: agentic AI &amp; NLP under <a href="https://www.cs.princeton.edu/~karthikn/">Prof. Karthik Narasimhan</a>; focusing on building reinforcement learning environments and evaluation harnesses, as well as designing multi-model agent pipelines
   <ul>
     <li>previous research involved stable matching in reciprocal compatability with a <a href="https://cos398-match-survey.vercel.app/">campus pilot</a> to design novel/improved algorithms at determining relationship affinity<br>
