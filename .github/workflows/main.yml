@@ -1,17 +1,23 @@
 name: Generate GitHub Metrics
+
 on:
   schedule:
     - cron: "00 10 * * *"   # 10:00 EDT daily
   workflow_dispatch:
   push: {branches: ["master", "main"]}
 
-
 jobs:
   build:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+
     steps:
+      - name: Checkout default branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.repository.default_branch }}
+
       - name: Render metrics
         uses: lowlighter/metrics@latest
         with:
@@ -19,11 +25,15 @@ jobs:
           user: Ammaar-Alam
           filename: github-metrics.svg
 
+          # Render the exact same SVG, but do not commit it yet.
+          # The next step patches only the incorrect repository text nodes.
+          output_action: none
+
           template: classic
           base: header, activity, community, repositories, metadata
           config_timezone: America/New_York
 
-          config_order: base.header, base.activity, base.community, base.repositories, base.metadata, languages, lines  
+          config_order: base.header, base.activity, base.community, base.repositories, base.metadata, languages, lines
 
           # === Languages ===
           plugin_languages: yes
@@ -50,7 +60,6 @@ jobs:
           # plugin_steam_user: "76561198800048554"
           # plugin_steam_token: ${{ secrets.STEAM_API_KEY }}
 
-
           # === Skipping Outliers ===
           # 1) Global skip (many plugins inherit this)
           repositories_skipped: |
@@ -65,6 +74,7 @@ jobs:
             ammaar-alam/treehouselabs-takehome
             ammaar-alam/save-the-pet
             ammaar-alam/imposter
+
           # 2) Languages plugin explicit skip (inherits global, but add for clarity)
           plugin_languages_skipped: |
             @use.patterns
@@ -75,6 +85,7 @@ jobs:
             ammaar-alam/cos333-a*
             ammaar-alam/My_COS217_A*
             ammaar-alam/draw-calculator
+
           # 3) Lines plugin explicit skip
           plugin_lines_skipped: |
             @use.patterns
@@ -86,3 +97,188 @@ jobs:
             ammaar-alam/My_COS217_A*
             ammaar-alam/draw-calculator
             ammaar-alam/My_COS217_A*
+
+      - name: Patch repository aggregate stats
+        env:
+          METRICS_TOKEN: ${{ secrets.METRICS_TOKEN }}
+          METRICS_USER: Ammaar-Alam
+          REPOSITORIES_LIMIT: "100"
+        run: |
+          python3 <<'PY'
+          import json
+          import os
+          import pathlib
+          import re
+          import urllib.error
+          import urllib.request
+          from collections import Counter
+
+          token = os.environ["METRICS_TOKEN"]
+          login = os.environ["METRICS_USER"]
+          limit = int(os.environ.get("REPOSITORIES_LIMIT", "100"))
+
+          graphql_query = """
+          query($login: String!, $first: Int!, $after: String) {
+            user(login: $login) {
+              repositories(
+                first: $first
+                after: $after
+                ownerAffiliations: OWNER
+                isFork: false
+                orderBy: {field: UPDATED_AT, direction: DESC}
+              ) {
+                pageInfo {
+                  hasNextPage
+                  endCursor
+                }
+                nodes {
+                  name
+                  forkCount
+                  watchers {
+                    totalCount
+                  }
+                  stargazers {
+                    totalCount
+                  }
+                  releases {
+                    totalCount
+                  }
+                  licenseInfo {
+                    name
+                    spdxId
+                  }
+                }
+              }
+            }
+          }
+          """
+
+          def github_graphql(query, variables):
+              body = json.dumps({"query": query, "variables": variables}).encode("utf-8")
+              request = urllib.request.Request(
+                  "https://api.github.com/graphql",
+                  data=body,
+                  method="POST",
+                  headers={
+                      "Authorization": f"Bearer {token}",
+                      "Accept": "application/vnd.github+json",
+                      "Content-Type": "application/json",
+                      "User-Agent": "metrics-svg-repository-stats-patch",
+                  },
+              )
+
+              try:
+                  with urllib.request.urlopen(request, timeout=30) as response:
+                      payload = json.loads(response.read().decode("utf-8"))
+              except urllib.error.HTTPError as error:
+                  details = error.read().decode("utf-8", errors="replace")
+                  raise SystemExit(f"GitHub GraphQL request failed: HTTP {error.code}\n{details}")
+
+              if payload.get("errors"):
+                  raise SystemExit("GitHub GraphQL returned errors:\n" + json.dumps(payload["errors"], indent=2))
+
+              return payload["data"]
+
+          repos = []
+          after = None
+
+          while len(repos) < limit:
+              first = min(100, limit - len(repos))
+              data = github_graphql(graphql_query, {"login": login, "first": first, "after": after})
+              repository_connection = data["user"]["repositories"]
+              repos.extend(repository_connection["nodes"])
+
+              page_info = repository_connection["pageInfo"]
+              if not page_info["hasNextPage"]:
+                  break
+              after = page_info["endCursor"]
+
+          stats = {
+              "releases": sum((repo.get("releases") or {}).get("totalCount") or 0 for repo in repos),
+              "stargazers": sum((repo.get("stargazers") or {}).get("totalCount") or 0 for repo in repos),
+              "forks": sum(repo.get("forkCount") or 0 for repo in repos),
+              "watchers": sum((repo.get("watchers") or {}).get("totalCount") or 0 for repo in repos),
+          }
+
+          license_counter = Counter()
+          license_display = {}
+
+          for repo in repos:
+              license_info = repo.get("licenseInfo")
+              if not license_info:
+                  continue
+
+              spdx_id = license_info.get("spdxId") or ""
+              name = license_info.get("name") or ""
+
+              key = spdx_id or name
+              if not key:
+                  continue
+
+              if spdx_id == "NOASSERTION":
+                  display = name
+              else:
+                  display = spdx_id or name
+
+              license_counter[key] += 1
+              license_display[key] = display
+
+          favorite_license = ""
+          if license_counter:
+              favorite_license_key = license_counter.most_common(1)[0][0]
+              favorite_license = license_display[favorite_license_key]
+
+          def plural(value, singular):
+              return f"{value} {singular}" if value == 1 else f"{value} {singular}s"
+
+          source = pathlib.Path("/metrics_renders/github-metrics.svg")
+          destination = pathlib.Path("github-metrics.svg")
+
+          if not source.exists():
+              raise SystemExit("Expected rendered SVG at /metrics_renders/github-metrics.svg, but it was not found.")
+
+          svg = source.read_text(encoding="utf-8")
+
+          replacements = [
+              (r"\b\d+ Releases?\b", plural(stats["releases"], "Release")),
+              (r"\b\d+ Stargazers?\b", plural(stats["stargazers"], "Stargazer")),
+              (r"\b\d+ Forkers?\b", plural(stats["forks"], "Forker")),
+              (r"\b\d+ Watchers?\b", plural(stats["watchers"], "Watcher")),
+          ]
+
+          for pattern, replacement in replacements:
+              svg, count = re.subn(pattern, replacement, svg, count=1)
+              if count != 1:
+                  raise SystemExit(f"Could not patch expected SVG text node matching: {pattern}")
+
+          license_text = f"Prefers {favorite_license} license" if favorite_license else "No license preference"
+          svg, count = re.subn(
+              r"No license preference|Prefers [^<\n]+ license",
+              license_text,
+              svg,
+              count=1,
+          )
+
+          if count != 1:
+              raise SystemExit("Could not patch expected SVG license text node.")
+
+          destination.write_text(svg, encoding="utf-8")
+
+          print("Patched repository stats:")
+          print(json.dumps({"repositories_patched": len(repos), **stats, "favorite_license": favorite_license or None}, indent=2))
+          PY
+
+      - name: Commit metrics
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add github-metrics.svg
+
+          if git diff --cached --quiet; then
+            echo "No metrics changes to commit."
+            exit 0
+          fi
+
+          git commit -m "Update github-metrics.svg - [Skip GitHub Action]"
+          git push origin HEAD:${{ github.event.repository.default_branch }}
