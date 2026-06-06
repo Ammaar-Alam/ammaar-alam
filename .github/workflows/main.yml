@@ -1,13 +1,11 @@
 name: Generate GitHub Metrics
 
-"on":
+on:
   schedule:
     - cron: "00 10 * * *"   # 10:00 EDT daily
   workflow_dispatch:
   push:
     branches: ["master", "main"]
-    paths-ignore:
-      - "github-metrics.svg"
 
 concurrency:
   group: github-metrics-${{ github.ref }}
@@ -15,6 +13,7 @@ concurrency:
 
 jobs:
   build:
+    if: github.event_name != 'push' || !contains(github.event.head_commit.message, '[skip ci]')
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -25,7 +24,6 @@ jobs:
         with:
           ref: ${{ github.event.repository.default_branch }}
           fetch-depth: 0
-          persist-credentials: true
 
       - name: Render metrics
         uses: lowlighter/metrics@latest
@@ -34,13 +32,14 @@ jobs:
           user: Ammaar-Alam
           filename: github-metrics.svg
 
-          # Render but do not commit yet. The patch step edits the generated SVG,
-          # then the final step commits the patched file.
+          # Render the normal lowlighter/metrics SVG first, but do not commit it yet.
+          # The next step patches only the flaky repository aggregates and language body.
           output_action: none
 
           template: classic
           base: header, activity, community, repositories, metadata
           config_timezone: America/New_York
+
           config_order: base.header, base.activity, base.community, base.repositories, base.metadata, languages, lines
 
           # === Languages ===
@@ -122,6 +121,7 @@ jobs:
           import urllib.error
           import urllib.request
           from collections import Counter, defaultdict
+          from xml.etree import ElementTree
 
           token = os.environ["METRICS_TOKEN"]
           login = os.environ["METRICS_USER"]
@@ -167,19 +167,36 @@ jobs:
                 isFork: false
                 orderBy: {field: UPDATED_AT, direction: DESC}
               ) {
-                pageInfo { hasNextPage endCursor }
+                pageInfo {
+                  hasNextPage
+                  endCursor
+                }
                 nodes {
                   name
-                  owner { login }
+                  owner {
+                    login
+                  }
                   forkCount
-                  watchers { totalCount }
-                  stargazers { totalCount }
-                  releases { totalCount }
-                  licenseInfo { name spdxId }
+                  watchers {
+                    totalCount
+                  }
+                  stargazers {
+                    totalCount
+                  }
+                  releases {
+                    totalCount
+                  }
+                  licenseInfo {
+                    name
+                    spdxId
+                  }
                   languages(first: 8) {
                     edges {
                       size
-                      node { name color }
+                      node {
+                        name
+                        color
+                      }
                     }
                   }
                 }
@@ -191,11 +208,16 @@ jobs:
               ) {
                 nodes {
                   name
-                  owner { login }
+                  owner {
+                    login
+                  }
                   languages(first: 8) {
                     edges {
                       size
-                      node { name color }
+                      node {
+                        name
+                        color
+                      }
                     }
                   }
                 }
@@ -238,8 +260,9 @@ jobs:
               first = min(100, limit - len(repos))
               data = github_graphql(graphql_query, {"login": login, "first": first, "after": after})
               user = data["user"]
+
               repository_connection = user["repositories"]
-              repos.extend(repository_connection["nodes"] or [])
+              repos.extend(repository_connection["nodes"])
 
               if not contributed_repos:
                   contributed_repos = user.get("repositoriesContributedTo", {}).get("nodes", []) or []
@@ -264,15 +287,19 @@ jobs:
 
           license_counter = Counter()
           license_display = {}
+
           for repo in repos:
               license_info = repo.get("licenseInfo")
               if not license_info:
                   continue
+
               spdx_id = license_info.get("spdxId") or ""
               name = license_info.get("name") or ""
               key = spdx_id or name
+
               if not key:
                   continue
+
               display = name if spdx_id == "NOASSERTION" else (spdx_id or name)
               license_counter[key] += 1
               license_display[key] = display
@@ -295,14 +322,17 @@ jobs:
           def is_skipped(repo):
               full_name = repo_full_name(repo).lower()
               short_name = repo["name"].lower()
+
               for pattern in skip_patterns:
                   if fnmatch.fnmatchcase(full_name, pattern):
                       return True
                   if "/" not in pattern and fnmatch.fnmatchcase(short_name, pattern):
                       return True
+
               return False
 
           unique_languages = set()
+
           for repo in [*repos, *contributed_repos]:
               for edge in ((repo.get("languages") or {}).get("edges") or []):
                   language_name = ((edge.get("node") or {}).get("name") or "").strip()
@@ -311,25 +341,30 @@ jobs:
 
           language_sizes = defaultdict(int)
           language_colors = {}
+
           for repo in repos:
               if is_skipped(repo):
                   continue
+
               for edge in ((repo.get("languages") or {}).get("edges") or []):
                   language_node = edge.get("node") or {}
                   language_name = (language_node.get("name") or "").strip()
                   language_color = language_node.get("color") or "#ededed"
                   language_size = edge.get("size") or 0
+
                   if not language_name:
                       continue
                   if language_name.lower() in ignored_languages:
                       continue
                   if language_size <= 0:
                       continue
+
                   language_sizes[language_name] += language_size
                   language_colors.setdefault(language_name, language_color)
 
           top_languages = sorted(language_sizes.items(), key=lambda item: item[1], reverse=True)[:display_language_limit]
           visible_total = sum(size for _, size in top_languages)
+
           if not top_languages or visible_total <= 0:
               raise SystemExit("No displayable language stats were computed; refusing to commit a broken SVG.")
 
@@ -344,11 +379,13 @@ jobs:
 
           def format_bytes(value):
               units = [("E", 10**18), ("P", 10**15), ("T", 10**12), ("G", 10**9), ("M", 10**6), ("k", 10**3)]
+
               for unit, divisor in units:
                   if value / divisor >= 1:
                       text = f"{value / divisor:.2f}"[:4]
                       text = re.sub(r"\.0*$", "", text)
                       return f"{text} {unit}B"
+
               return f"{value} byte" if value == 1 else f"{value} bytes"
 
           def format_percentage(ratio):
@@ -361,6 +398,7 @@ jobs:
               rows = [[], []]
               running_x = 0.0
               normalized_entries = []
+
               for name, size in entries:
                   ratio = size / visible_total if visible_total else 0
                   normalized_entries.append({
@@ -371,13 +409,16 @@ jobs:
                       "color": language_colors.get(name) or "#ededed",
                   })
                   running_x += ratio
+
               for index, entry in enumerate(normalized_entries):
                   rows[index % 2].append(entry)
+
               return normalized_entries, rows
 
           def build_language_block():
               entries, rows = build_language_rows(top_languages)
               language_count = len(unique_languages)
+
               icon_path = (
                   "M1.5 2.75a.25.25 0 01.25-.25h12.5a.25.25 0 01.25.25v8.5a.25.25 0 "
                   "01-.25.25h-6.5a.75.75 0 00-.53.22L4.5 14.44v-2.19a.75.75 0 "
@@ -389,6 +430,7 @@ jobs:
                   "0 011.06 0zm2.44 0a.75.75 0 000 1.06L10.69 7 9.22 8.47a.75.75 "
                   "0 001.06 1.06l2-2a.75.75 0 000-1.06l-2-2a.75.75 0 00-1.06 0z"
               )
+
               block = []
               block.append('            <section>')
               block.append('                <h2 class="field">')
@@ -405,15 +447,19 @@ jobs:
               block.append(f'                        <rect x="0" y="0" width="{bar_width}" height="8" fill="white" rx="5"/>')
               block.append('                    </mask>')
               block.append('                    <rect mask="url(#languages-bar)" x="0" y="0" width="0" height="8" fill="#d1d5da"/>')
+
               for entry in entries:
                   x = js_float(entry["x"] * bar_width)
                   width = js_float(entry["ratio"] * bar_width)
                   color = html.escape(entry["color"], quote=True)
                   block.append(f'                    <rect mask="url(#languages-bar)" x="{x}" y="0" width="{width}" height="8" fill="{color}"/>')
+
               block.append('                </svg>')
               block.append('                <div class="row fill-width">')
+
               for row_entries in rows:
                   block.append('                    <section>')
+
                   for entry in row_entries:
                       escaped_name = html.escape(entry["name"])
                       escaped_color = html.escape(entry["color"], quote=True)
@@ -429,15 +475,20 @@ jobs:
                       block.append(f'                                <div>{format_percentage(entry["ratio"])}</div>')
                       block.append('                            </small>')
                       block.append('                        </div>')
+
                   block.append('                    </section>')
+
               block.append('                </div>')
               block.append('            </section>')
+
               return "\n".join(block) + "\n"
 
           source = pathlib.Path("/metrics_renders/github-metrics.svg")
           destination = pathlib.Path("github-metrics.svg")
+
           if not source.exists():
               raise SystemExit("Expected rendered SVG at /metrics_renders/github-metrics.svg, but it was not found.")
+
           svg = source.read_text(encoding="utf-8")
 
           replacements = [
@@ -446,6 +497,7 @@ jobs:
               (r"\b\d+ Forkers?\b", plural(repo_stats["forks"], "Forker")),
               (r"\b\d+ Watchers?\b", plural(repo_stats["watchers"], "Watcher")),
           ]
+
           for pattern, replacement in replacements:
               svg, count = re.subn(pattern, replacement, svg, count=1)
               if count != 1:
@@ -453,17 +505,30 @@ jobs:
 
           license_text = f"Prefers {favorite_license} license" if favorite_license else "No license preference"
           svg, count = re.subn(r"No license preference|Prefers [^<\n]+ license", license_text, svg, count=1)
+
           if count != 1:
               raise SystemExit("Could not patch expected SVG license text node.")
 
           language_block = build_language_block()
-          language_header_match = re.search(r'(?s)<section>\s*<h2 class="field">.*?\b\d+ Languages?\b.*?</h2>\s*</section>', svg)
+          language_header_match = re.search(
+              r'<section>\s*<h2 class="field">(?:(?!</h2>).)*\b\d+ Languages?\b(?:(?!</h2>).)*</h2>\s*</section>',
+              svg,
+              flags=re.S,
+          )
+
           if not language_header_match:
               raise SystemExit("Could not find the languages section header to patch.")
+
           tail = svg[language_header_match.end():]
-          activity_match = re.search(r'(?s)\n            <section class="largeable largeable-inline-flex">\s*<div class="row">\s*<section>\s*<h2 class="field">.*?Activity', tail)
+          activity_match = re.search(
+              r'\n            <section class="largeable largeable-inline-flex">\s*<div class="row">\s*<section>\s*<h2 class="field">(?:(?!</h2>).)*\bActivity\b',
+              tail,
+              flags=re.S,
+          )
+
           if not activity_match:
               raise SystemExit("Could not find the Activity section after languages.")
+
           language_start = language_header_match.start()
           language_end = language_header_match.end() + activity_match.start()
           svg = svg[:language_start] + language_block + svg[language_end:]
@@ -477,21 +542,35 @@ jobs:
               ".field.language.details small&gt;:not(:last-child){margin-right:6px}"
               ".field.license.details{display:flex;justify-content:space-between}"
           )
+
           if "svg.bar{margin:4px 0}" not in svg:
               css_anchor = ".calendar .day{outline:1px solid rgba(27,31,35,.04);outline-offset:-1px}"
               if css_anchor not in svg:
                   raise SystemExit("Could not find CSS anchor for language styles.")
               svg = svg.replace(css_anchor, css_anchor + language_css, 1)
 
-          svg, height_replacements = re.subn(r'(<svg xmlns="http://www.w3.org/2000/svg" width="480" height=")\d+(" class="">)', r'\g<1>525\2', svg, count=1)
+          svg, height_replacements = re.subn(
+              r'(<svg xmlns="http://www.w3.org/2000/svg" width="480" height=")\d+(" class="">)',
+              r'\g<1>525\2',
+              svg,
+              count=1,
+          )
+
           if height_replacements != 1:
               raise SystemExit("Could not patch root SVG height.")
+
           if '<svg class="bar"' not in svg:
               raise SystemExit("Patched SVG is still missing the languages bar.")
           if 'class="field language details"' not in svg:
               raise SystemExit("Patched SVG is still missing language detail rows.")
 
+          try:
+              ElementTree.fromstring(svg)
+          except ElementTree.ParseError as error:
+              raise SystemExit(f"Patched SVG is invalid XML: {error}")
+
           destination.write_text(svg, encoding="utf-8")
+
           print("Patched metrics:")
           print(json.dumps({
               "repositories_patched": len(repos),
@@ -502,7 +581,7 @@ jobs:
           }, indent=2))
           PY
 
-      - name: Commit patched metrics
+      - name: Commit metrics
         run: |
           set -euo pipefail
 
@@ -517,4 +596,5 @@ jobs:
           fi
 
           git commit -m "Update github-metrics.svg [skip ci]"
-          git push origin HEAD:${{ github.event.repository.default_branch }}
+          git pull --rebase origin "${{ github.event.repository.default_branch }}"
+          git push origin "HEAD:${{ github.event.repository.default_branch }}"
