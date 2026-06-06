@@ -4,7 +4,14 @@ on:
   schedule:
     - cron: "00 10 * * *"   # 10:00 EDT daily
   workflow_dispatch:
-  push: {branches: ["master", "main"]}
+  push:
+    branches: ["master", "main"]
+    paths-ignore:
+      - "github-metrics.svg"
+
+concurrency:
+  group: github-metrics-${{ github.ref }}
+  cancel-in-progress: false
 
 jobs:
   build:
@@ -17,6 +24,8 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: ${{ github.event.repository.default_branch }}
+          persist-credentials: true
+          fetch-depth: 0
 
       - name: Render metrics
         uses: lowlighter/metrics@latest
@@ -25,14 +34,12 @@ jobs:
           user: Ammaar-Alam
           filename: github-metrics.svg
 
-          # Render the exact same SVG, but do not commit it yet.
-          # The next step patches only the incorrect repository text nodes.
+          # Generate into /metrics_renders first; this workflow patches and commits the final SVG.
           output_action: none
 
           template: classic
           base: header, activity, community, repositories, metadata
           config_timezone: America/New_York
-
           config_order: base.header, base.activity, base.community, base.repositories, base.metadata, languages, lines
 
           # === Languages ===
@@ -270,6 +277,9 @@ jobs:
                   break
               after = page_info["endCursor"]
 
+          if not repos:
+              raise SystemExit("No repositories were returned from GitHub GraphQL; refusing to commit a broken SVG.")
+
           def total_count(repo, key):
               return (repo.get(key) or {}).get("totalCount") or 0
 
@@ -360,6 +370,9 @@ jobs:
           top_languages = sorted(language_sizes.items(), key=lambda item: item[1], reverse=True)[:display_language_limit]
           visible_total = sum(size for _, size in top_languages)
 
+          if not top_languages or visible_total <= 0:
+              raise SystemExit("No displayable language stats were computed; refusing to commit a broken SVG.")
+
           def plural(value, singular):
               return f"{value} {singular}" if value == 1 else f"{value} {singular}s"
 
@@ -395,7 +408,6 @@ jobs:
 
           def build_language_rows(entries):
               rows = [[], []]
-
               running_x = 0.0
               normalized_entries = []
 
@@ -416,9 +428,6 @@ jobs:
               return normalized_entries, rows
 
           def build_language_block():
-              if not top_languages or visible_total <= 0:
-                  return None
-
               entries, rows = build_language_rows(top_languages)
               language_count = len(unique_languages)
 
@@ -449,7 +458,7 @@ jobs:
               block.append('                    <mask id="languages-bar">')
               block.append(f'                        <rect x="0" y="0" width="{bar_width}" height="8" fill="white" rx="5"/>')
               block.append('                    </mask>')
-              block.append(f'                    <rect mask="url(#languages-bar)" x="0" y="0" width="0" height="8" fill="#d1d5da"/>')
+              block.append('                    <rect mask="url(#languages-bar)" x="0" y="0" width="0" height="8" fill="#d1d5da"/>')
 
               for entry in entries:
                   x = js_float(entry["x"] * bar_width)
@@ -518,51 +527,57 @@ jobs:
               raise SystemExit("Could not patch expected SVG license text node.")
 
           language_block = build_language_block()
+          language_header_match = re.search(
+              r'(?s)<section>\s*<h2 class="field">.*?\b\d+ Languages?\b.*?</h2>\s*</section>',
+              svg,
+          )
 
-          if language_block:
-              language_header_match = re.search(
-                  r'(?s)<section>\s*<h2 class="field">.*?\b\d+ Languages?\b.*?</h2>\s*</section>',
-                  svg,
-              )
+          if not language_header_match:
+              raise SystemExit("Could not find the languages section header to patch.")
 
-              if not language_header_match:
-                  raise SystemExit("Could not find the languages section header to patch.")
+          tail = svg[language_header_match.end():]
+          activity_match = re.search(
+              r'(?s)\n            <section class="largeable largeable-inline-flex">\s*<div class="row">\s*<section>\s*<h2 class="field">.*?Activity',
+              tail,
+          )
 
-              tail = svg[language_header_match.end():]
-              activity_match = re.search(
-                  r'(?s)\n            <section class="largeable largeable-inline-flex">\s*<div class="row">\s*<section>\s*<h2 class="field">.*?Activity',
-                  tail,
-              )
+          if not activity_match:
+              raise SystemExit("Could not find the Activity section after languages.")
 
-              if not activity_match:
-                  raise SystemExit("Could not find the Activity section after languages.")
+          language_start = language_header_match.start()
+          language_end = language_header_match.end() + activity_match.start()
+          svg = svg[:language_start] + language_block + svg[language_end:]
 
-              language_start = language_header_match.start()
-              language_end = language_header_match.end() + activity_match.start()
-              svg = svg[:language_start] + language_block + svg[language_end:]
+          language_css = (
+              "svg.bar{margin:4px 0}"
+              ".field.language{margin:0 8px;flex-grow:0}"
+              ".field.language.details{display:flex;justify-content:space-between}"
+              ".field.language.details small,.field.license.details small{display:flex;justify-content:space-between;color:#666;text-align:right}"
+              ".field.language.details small&gt;*,.field.language.details&gt;*{flex:1 1 0}"
+              ".field.language.details small&gt;:not(:last-child){margin-right:6px}"
+              ".field.license.details{display:flex;justify-content:space-between}"
+          )
 
-              language_css = (
-                  "svg.bar{margin:4px 0}"
-                  ".field.language{margin:0 8px;flex-grow:0}"
-                  ".field.language.details{display:flex;justify-content:space-between}"
-                  ".field.language.details small,.field.license.details small{display:flex;justify-content:space-between;color:#666;text-align:right}"
-                  ".field.language.details small&gt;*,.field.language.details&gt;*{flex:1 1 0}"
-                  ".field.language.details small&gt;:not(:last-child){margin-right:6px}"
-                  ".field.license.details{display:flex;justify-content:space-between}"
-              )
+          if "svg.bar{margin:4px 0}" not in svg:
+              css_anchor = ".calendar .day{outline:1px solid rgba(27,31,35,.04);outline-offset:-1px}"
+              if css_anchor not in svg:
+                  raise SystemExit("Could not find CSS anchor for language styles.")
+              svg = svg.replace(css_anchor, css_anchor + language_css, 1)
 
-              if "svg.bar{margin:4px 0}" not in svg:
-                  css_anchor = ".calendar .day{outline:1px solid rgba(27,31,35,.04);outline-offset:-1px}"
-                  if css_anchor not in svg:
-                      raise SystemExit("Could not find CSS anchor for language styles.")
-                  svg = svg.replace(css_anchor, css_anchor + language_css, 1)
+          svg, height_replacements = re.subn(
+              r'(<svg xmlns="http://www.w3.org/2000/svg" width="480" height=")\d+(" class="">)',
+              r'\g<1>525\2',
+              svg,
+              count=1,
+          )
 
-              svg = re.sub(
-                  r'(<svg xmlns="http://www.w3.org/2000/svg" width="480" height=")\d+(" class="">)',
-                  r'\g<1>525\2',
-                  svg,
-                  count=1,
-              )
+          if height_replacements != 1:
+              raise SystemExit("Could not patch root SVG height.")
+
+          if '<svg class="bar"' not in svg:
+              raise SystemExit("Patched SVG is still missing the languages bar.")
+          if 'class="field language details"' not in svg:
+              raise SystemExit("Patched SVG is still missing language detail rows.")
 
           destination.write_text(svg, encoding="utf-8")
 
@@ -575,3 +590,37 @@ jobs:
               "languages_displayed": [name for name, _ in top_languages],
           }, indent=2))
           PY
+
+      - name: Validate patched SVG
+        run: |
+          set -euo pipefail
+
+          test -f github-metrics.svg
+          grep -q '<svg class="bar"' github-metrics.svg
+          grep -q 'class="field language details"' github-metrics.svg
+          grep -Eq '[1-9][0-9]* Releases?' github-metrics.svg
+          grep -Eq '[1-9][0-9]* Stargazers?' github-metrics.svg
+          grep -Eq '[1-9][0-9]* Forkers?' github-metrics.svg
+          grep -Eq '[1-9][0-9]* Watchers?' github-metrics.svg
+          grep -Eq 'Prefers [^<]+ license|No license preference' github-metrics.svg
+
+          echo "Patched SVG validation passed."
+
+      - name: Commit patched metrics
+        run: |
+          set -euo pipefail
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add github-metrics.svg
+
+          if git diff --cached --quiet; then
+            echo "No metrics changes to commit."
+            exit 0
+          fi
+
+          git commit -m "Update github-metrics.svg [skip ci]"
+          git fetch origin "${{ github.event.repository.default_branch }}"
+          git rebase "origin/${{ github.event.repository.default_branch }}"
+          git push origin "HEAD:${{ github.event.repository.default_branch }}"
